@@ -1,1 +1,1 @@
-# synco: Differences between amino-acid backcbone conformation of synonymous codons
+# synco: Differences between synonymous codon-specific Ramachandran plots
