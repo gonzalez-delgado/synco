@@ -1,10 +1,8 @@
 # synco: Differences between synonymous codon-specific Ramachandran plots
 
-The code presented in synco implements the two-sample goodness-of-fit test introduced in [1] to assess the effect of the translated codon on amino-acid backbone conformation. This work, described in [2], reproduces the analysis presented in [3] using the methodology defined in [1].
+The code presented in synco implements the two-sample goodness-of-fit test introduced in [1] to assess the effect of the translated codon on amino-acid backbone conformation. This work, described in [2], reproduces the analysis presented in [3] using the methodology defined in [1]. 
 
-
-
-
+The file [codon_test.R](https://github.com/gonzalez-delgado/synco/blob/main/codon_test.R) performs the goodness-of-fit test assessing the null hypothesis "the codon-specific (phi, psi) distribution is the same for synonymous codons". Codon-specific Ramachandran plots are defined for a given amino-acid without taking into account the nearest neighbors effect. The same null hypothesis, but taking neighboring residues into account, is tested in [codon_test_tripeptides.R](https://github.com/gonzalez-delgado/synco/blob/main/codon_test_tripeptides.R). Here, the codon-specific Ramachandran plots contain conformations coming from a fixed tripeptide (fragment of three consecutive amino-acids). This analysis uses the function [get_tripeptides](https://github.com/gonzalez-delgado/synco/blob/main/get_tripeptides.R), which uses the sequence information of the [database](https://doi.org/10.7910/DVN/5P81D4) to extract nehgbors' identities.
 
 #### References
 
