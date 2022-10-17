@@ -8,4 +8,4 @@ The code presented in synco implements the two-sample goodness-of-fit test intro
 
 #### References
 
-[1] González-Delgado, J., González-Sanz, A., Cortés, J., & Neuvial, P. (2021). Two-sample goodness-of-fit tests on the flat torus based on Wasserstein distance and their relevance to structural biology. arXiv:2108.00165. [[arxiv]](https://arxiv.org/abs/2108.00165).
+[1] González-Delgado, J., González-Sanz, A., Cortés, J., & Neuvial, P. (2021). Two-sample goodness-of-fit tests on the flat torus based on Wasserstein distance and their relevance to structural biology. arXiv:2108.00165. [[arxiv]](https://arxiv.org/abs/2108.00165)[[HAL]](https://hal.archives-ouvertes.fr/hal-03369795v2).
