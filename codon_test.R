@@ -1,5 +1,6 @@
 rm(list = ls())
 library(readr)
+library(devtools)
 
 # Install torustest from https://github.com/gonzalez-delgado/torustest
 devtools::install_github("https://github.com/gonzalez-delgado/torustest")
