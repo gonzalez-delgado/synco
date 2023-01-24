@@ -1,9 +1,11 @@
 rm(list = ls())
 library(readr)
 
-# Load functions from wgof_torus (https://github.com/gonzalez-delgado/wgof_torus)
-wgof_torus_path <- '/path_to_downloaded_wgof_torus_scripts' # Folder containing (only) the R scripts of wgof_torus
-for(Rfile in list.files(wgof_torus_path)){if(grepl("\\.R$", Rfile)){source(paste(c(wgof_torus_path, Rfile), collapse = '/'))}}
+# Install torustest from https://github.com/gonzalez-delgado/torustest
+devtools::install_github("https://github.com/gonzalez-delgado/torustest")
+
+# Import torustest
+library(torustest)
 
 # Load replication data downloaded from https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/5P81D4
 data_path <- '/path_to_data'
@@ -20,7 +22,7 @@ data_precs$secondary_angles[which(data_precs$phi > -180 & data_precs$phi <= 0 & 
 
 # Simulate null statistics
 N_sim = 2000
-sim_null <- sim.null.stat(N_sim, NC = 4)
+sim_null_dist <- torustest::sim.null.stat(N_sim, NC = 4)
 
 # Whether to perform each test for M sub-samples of size N = 50 (to make the analysis comparable to the tripeptide-based one: see SI).
 subsample <- FALSE
@@ -73,7 +75,7 @@ for (sec in c('H', 'E', 'Other')){
           data_c2_ss <- data_c2[sample(1:nrow(data_c2), N), ]
           
           #p-value for the goodness-of-fit test
-          pv_k_ss <- twosample.geodesic.torus.test(data_c1_ss, data_c2_ss, n_geodesics = 2, NC_geodesic = 2, sim_null = sim_null)
+          pv_k_ss <- torustest::twosample.geodesic.torus.test(data_c1_ss, data_c2_ss, n_geodesics = 2, NC_geodesic = 2, sim_null = sim_null_dist)
           
           data_aa_k <- c(aa, comb_cod[k,1], comb_cod[k,1], pv_k_ss, sec, nrow(data_c1_ss), nrow(data_c2_ss))
           data_codon <- rbind(data_codon, data_aa_k)
@@ -83,7 +85,7 @@ for (sec in c('H', 'E', 'Other')){
       }else{
         
         #p-value for the goodness-of-fit test
-        pv_k <- twosample.geodesic.torus.test(data_c1, data_c2, n_geodesics = 2, NC_geodesic = 2, sim_null = sim_null)
+        pv_k <- torustest::twosample.geodesic.torus.test(data_c1, data_c2, n_geodesics = 2, NC_geodesic = 2, sim_null = sim_null_dist)
      
         data_aa_k <- c(aa, comb_cod[k,1], comb_cod[k,2], pv_k, sec, nrow(data_c1), nrow(data_c2))
         data_codon <- rbind(data_codon, data_aa_k)
