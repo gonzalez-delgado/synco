@@ -6,7 +6,7 @@ The file [codon_test.R](https://github.com/gonzalez-delgado/synco/blob/main/codo
 
 #### References
 
-[1] González-Delgado, J., González-Sanz, A., Cortés, J., & Neuvial, P. (2021). Two-sample goodness-of-fit tests on the flat torus based on Wasserstein distance and their relevance to structural biology. arXiv:2108.00165. [[arxiv]](https://arxiv.org/abs/2108.00165)[[HAL]](https://hal.archives-ouvertes.fr/hal-03369795v2)[[code]](https://github.com/gonzalez-delgado/wgof_torus).
+[1] González-Delgado, J., González-Sanz, A., Cortés, J., & Neuvial, P. (2021). Two-sample goodness-of-fit tests on the flat torus based on Wasserstein distance and their relevance to structural biology. <i>Electron. J. Statist</i>., 17(1): 1547–1586, 2023. [[url]](https://doi.org/10.1214/23-EJS2135) [[code]](https://github.com/gonzalez-delgado/torustest).
 
 [2] J. González-Delgado, Pau Bernadó, Pablo Mier, Pierre Neuvial, Juan Cortés. Statistical tests to detect differences between codon-specific Ramachandran plots. Submitted. [bioRxiv](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v1).
 
