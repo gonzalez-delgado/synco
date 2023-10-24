@@ -8,7 +8,7 @@ The file [codon_test.R](https://github.com/gonzalez-delgado/synco/blob/main/codo
 
 [1] González-Delgado, J., González-Sanz, A., Cortés, J., & Neuvial, P. (2021). Two-sample goodness-of-fit tests on the flat torus based on Wasserstein distance and their relevance to structural biology. <i>Electron. J. Statist</i>., 17(1): 1547–1586, 2023. [[url]](https://doi.org/10.1214/23-EJS2135) [[code]](https://github.com/gonzalez-delgado/torustest).
 
-[2] J. González-Delgado, Pau Bernadó, Pablo Mier, Pierre Neuvial, Juan Cortés. Statistical tests to detect differences between codon-specific Ramachandran plots. Submitted. [bioRxiv](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v1).
+[2] J. González-Delgado, Pau Bernadó, Pablo Mier, Pierre Neuvial, Juan Cortés. Statistical tests to detect differences between codon-specific Ramachandran plots. Submitted. [[bioRxiv]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v1).
 
 [3] Rosenberg, A.A., Marx, A. & Bronstein, A.M. Codon-specific Ramachandran plots show amino acid backbone conformation depends on identity of the translated codon. Nat Commun 13, 2815 (2022). https://doi.org/10.1038/s41467-022-30390-9.
 
