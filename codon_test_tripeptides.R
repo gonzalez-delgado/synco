@@ -113,11 +113,19 @@ data_codon$pv[which(data_codon$pv < 1/N_sim)] <- 1/N_sim
 data_codon$pv_corrected <- NA
 for(s in c('H', 'E', 'Other')){data_codon$pv_corrected[which(data_codon$sec == s)] <- p.adjust(data_codon$pv[which(data_codon$sec == s)], method = 'BH')}
 
-# Save results
+# Compute rejection proportions
+rej_E <- mean(data_codon$pv_corrected[which(data_codon$secondary == 'E')] < 0.05)
+rej_H <- mean(data_codon$pv_corrected[which(data_codon$secondary == 'H')] < 0.05)
 
-save_path <- '/path_to_save_results'
-saveRDS(data_codon, paste(c(save_path, 'codon_test_tripeptide_results.Rda'), collapse = '/'))
-
+# Plot results (Figure S5)
+library(ggplot2)
+theme_set(theme_bw(base_size = 15))
+ggplot(data_codon, aes(x = pv_corrected, col = secondary))+
+  stat_ecdf(size = 1.2)+
+  labs(x='BH p-value',y='ECDF',col='Secondary structure')+
+  theme(legend.position = 'bottom', text = element_text(size = 20),legend.box="vertical")+
+  geom_vline(xintercept = 0.05, alpha = 0.5, col = 'darkblue', linetype = 'dashed')+
+  annotate("label", x = 0.4, y = 0.88, size = 5, label = paste0('Rejection proportion:\n H: ',round(rej_H,2),'    E: ',round(rej_E,2))) 
 
 
 

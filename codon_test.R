@@ -7,7 +7,7 @@ library(readr)
 # Experimental data downloaded from https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/5P81D4
 data_path <- '/path_to_data'
 
-# AlphaFold2 data in the "nt_structure_2024.txt" file (not needed if AF2 data is not used)
+# AlphaFold2 data in the "nt_structure_2024.txt" file (don't needed if AF2 data is not used)
 AF2_path <- '/path_to_AF2_data' # Path to the file "nt_structure_2024.txt".
 
 # Load experimental data
@@ -124,8 +124,20 @@ data_codon$pv[which(data_codon$pv < 1/N_sim)] <- 1/N_sim
 data_codon$pv_corrected <- NA
 for(s in c('H', 'E', 'Other')){data_codon$pv_corrected[which(data_codon$sec == s)] <- p.adjust(data_codon$pv[which(data_codon$sec == s)], method = 'BH')}
 
-# Save results
+# Compute rejection proportions
 
-save_path <- '/path_to_save_results'
-saveRDS(data_codon, paste(c(save_path, 'codon_test_results.Rda'), collapse = '/'))
+rej_H <- mean(data_codon$pv_corrected[which(data_codon$sec == 'H')] < 0.05)
+rej_E <- mean(data_codon$pv_corrected[which(data_codon$sec == 'E')] < 0.05)
+rej_others <- mean(data_codon$pv_corrected[which(data_codon$sec == 'Other')] < 0.05)
 
+# Plot results (Figure 2a, 2b or S4)
+
+library(ggplot2)
+theme_set(theme_bw(base_size = 15))
+ggplot(data_codon, aes(x = pv_corrected, col = sec))+
+  stat_ecdf(size = 1.2)+
+  labs(x = 'BH p-value',y = 'ECDF',col = 'Secondary structure')+
+  theme(legend.position = 'bottom', text = element_text(size = 20), legend.box = "vertical")+
+  geom_vline(xintercept = 0.05, alpha = 0.5, col = 'darkblue', linetype = 'dashed')+
+  annotate("label", x = 0.4, y = 0.88, size = 3.5, 
+           label = paste0('Rejection proportion at 0.05:\n E: ',round(rej_E,2),'    H: ',round(rej_H,2),'    Others: ',round(rej_others,2))) 
