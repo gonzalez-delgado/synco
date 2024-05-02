@@ -20,10 +20,11 @@ trip_list <- expand.grid(aa_list, aa_list, aa_list)
 # Merge != H,E structures into one category
 data_trip$secondary[which(! data_trip$secondary %in% c('H', 'E'))] <- 'Other'
 
-# Uncomment do define secondary structure using angles
-#data_trip$secondary_angles <- 'Other'
-#data_trip$secondary_angles[which(data_trip$phi > -180 & data_trip$phi <= 0 & data_trip$psi > -120 & data_trip$psi <= 50)] <- 'H'
-#data_trip$secondary_angles[which(data_trip$phi > -180 & data_trip$phi <= 0 & data_trip$psi > 50 & data_trip$psi <= 240)] <- 'E'
+# Angle-based secondary structure classification
+data_trip$secondary_angles <- 'Other'
+data_trip$secondary_angles[which(data_trip$phi > -180 & data_trip$phi <= 0 & data_trip$psi > -120 & data_trip$psi <= 50)] <- 'H'
+data_trip$secondary_angles[which(data_trip$phi > -180 & data_trip$phi <= 0 & data_trip$psi > 50 & data_trip$psi <= 240)] <- 'E'
+do_angles <- FALSE # If the angle-based classification has to be considered, set to TRUE
 
 # Remove ambiguous codon assignments
 data_trip <- data_trip[-which(data_trip$codon_score < 1),]
@@ -49,10 +50,17 @@ for (sec in c('H', 'E', 'Other')){
   for (i in 1:nrow(trip_list)){
     
     cat(paste0('Performing goodness-of-fit geodesic test for ',as.vector(trip_list[i,1]),'-',as.vector(trip_list[i,2]),'-',as.vector(trip_list[i,3]),' tripeptide...\n'))
-
-    data_i <- data_trip[which(data_trip$res_left == as.vector(trip_list[i,1]) & data_trip$res == as.vector(trip_list[i,2]) & data_trip$res_right == as.vector(trip_list[i,3]) & data_trip$secondary == sec), c('phi', 'psi', 'codon')] # Conformations in "sec" (DSSP) structure corresponding to "aa" amino-acid
-    # Uncomment to use angle-based secondary structure classification
-    #data_i <- data_trip[which(data_trip$res_left == as.vector(trip_list[i,1]) & data_trip$res == as.vector(trip_list[i,2]) & data_trip$res_right == as.vector(trip_list[i,3]) & data_trip$secondary_angles == sec), c('phi', 'psi', 'codon')] # Conformations in "sec" (angles-based definition) structure corresponding to "aa" amino-acid
+  
+    if(!do_angles){ # DSSP-based secondary structure classification
+      
+      data_i <- data_trip[which(data_trip$res_left == as.vector(trip_list[i,1]) & data_trip$res == as.vector(trip_list[i,2]) & data_trip$res_right == as.vector(trip_list[i,3]) & data_trip$secondary == sec), c('phi', 'psi', 'codon')] # Conformations in "sec" (DSSP) structure corresponding to "aa" amino-acid
+    
+    }else{ # Angle-based secondary structure classification
+      
+       data_i <- data_trip[which(data_trip$res_left == as.vector(trip_list[i,1]) & data_trip$res == as.vector(trip_list[i,2]) & data_trip$res_right == as.vector(trip_list[i,3]) & data_trip$secondary_angles == sec), c('phi', 'psi', 'codon')] # Conformations in "sec" (angles-based definition) structure corresponding to "aa" amino-acid
+    
+    }
+       
     if(nrow(data_i) == 0){next}
     
     data_i <- data_i[!(is.na(data_i$phi) | is.na(data_i$psi)), ] # Remove NAs
@@ -74,7 +82,7 @@ for (sec in c('H', 'E', 'Other')){
       data_c1 <- data_i[which(data_i$codon == comb_cod[k,1]), c('phi','psi')]
       data_c2 <- data_i[which(data_i$codon == comb_cod[k,2]), c('phi','psi')]
       
-      if(nrow(data_c1) < 30 | nrow(data_c2) < 30){next} # Keep only samples with >= 30 points
+      if(nrow(data_c1) < 10 | nrow(data_c2) < 10){next} # Keep only samples with >= 10 points
       
       #p-value for the goodness-of-fit test
       pv_k <- torustest::twosample.geodesic.torus.test(data_c1, data_c2, n_geodesics = 2, NC_geodesic = 2, sim_null = sim_null)

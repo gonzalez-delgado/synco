@@ -4,19 +4,40 @@ library(readr)
 # Uncomment to install torustest
 #devtools::install_github("https://github.com/gonzalez-delgado/torustest")
 
-# Load replication data downloaded from https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/5P81D4
+# Experimental data downloaded from https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/5P81D4
 data_path <- '/path_to_data'
 
+# AlphaFold2 data in the "nt_structure_2024.txt" file (don't needed if AF2 data is not used)
+AF2_path <- '/path_to_AF2_data' # Path to the file "nt_structure_2024.txt".
+
+# Load experimental data
 data_precs <- readr::read_csv(paste(c(data_path, "data-precs.csv"), collapse = '/'))
 aa_list <- unique(data_precs$name) # List of amino-acids
+
+do_AF2 <- FALSE # To run the analysis on the AlphaFold2 database, set to TRUE
+
+if(do_AF2){
+  
+  # Load AF2 database
+  AF2_data <- readr::read_delim(paste(c(AF2_path,"nt_structure_2024.txt"), collapse = '/'), delim = "\t", escape_double = FALSE, trim_ws = TRUE)
+
+  AF2_data <- AF2_data[which(AF2_data$UniProt %in% unique(data_precs$unp_id)), ] # Keep only proteins present in the experimental database
+  AF2_data <- AF2_data[-which(AF2_data$pLDDT24 < 90),] # Filter by pLDDT score
+  AF2_data <- AF2_data[-which(AF2_data$Omega < 20 & AF2_data$Omega > -20), ] # Remove CIS conformations
+  AF2_data <- AF2_data[, c('UniProt', 'Position', 'Aa', 'Codon', 'Structure', 'Phi', 'Psi')]
+  colnames(AF2_data) <- colnames(data_precs)
+  data_precs <- AF2_data # Rename database
+
+}
 
 # Merge != H,E structures into one category
 data_precs$secondary[which(! data_precs$secondary %in% c('H', 'E'))] <- 'Other'
 
-# Uncomment to define secondary structure using angles
-#data_precs$secondary_angles <- 'Other'
-#data_precs$secondary_angles[which(data_precs$phi > -180 & data_precs$phi <= 0 & data_precs$psi > -120 & data_precs$psi <= 50)] <- 'H'
-#data_precs$secondary_angles[which(data_precs$phi > -180 & data_precs$phi <= 0 & data_precs$psi > 50 & data_precs$psi <= 240)] <- 'E'
+# Secondary structure angle-based definition
+data_precs$secondary_angles <- 'Other'
+data_precs$secondary_angles[which(data_precs$phi > -180 & data_precs$phi <= 0 & data_precs$psi > -120 & data_precs$psi <= 50)] <- 'H'
+data_precs$secondary_angles[which(data_precs$phi > -180 & data_precs$phi <= 0 & data_precs$psi > 50 & data_precs$psi <= 240)] <- 'E'
+do_angles <- FALSE # If the angle-based classification has to be considered, set to TRUE
 
 # Remove ambiguous codon assignments
 data_precs <- data_precs[-which(data_precs$codon_score < 1),]
@@ -43,9 +64,16 @@ for (sec in c('H', 'E', 'Other')){
     
     cat(paste0('Performing tests for ',aa,' amino-acid...\n'))
     
-    data_aa <- data_precs[which(data_precs$name == aa & data_precs$secondary == sec), c('phi', 'psi','codon')] # Conformations in "sec" (DSSP) structure corresponding to "aa" amino-acid
-    # Uncomment to use angle-based secondary structure classification
-    #data_aa <- data_precs[which(data_precs$name == aa & data_precs$secondary_angles == sec), c('phi', 'psi','codon')] # Conformations in "sec" (angles-based definition) structure corresponding to "aa" amino-acid
+    if(!do_angles){ # DSSP-based secondary structure classification
+      
+      data_aa <- data_precs[which(data_precs$name == aa & data_precs$secondary == sec), c('phi', 'psi','codon')] # Conformations in "sec" (DSSP) structure corresponding to "aa" amino-acid
+    
+    }else{ # Angle-based secondary structure classification
+      
+      data_aa <- data_precs[which(data_precs$name == aa & data_precs$secondary_angles == sec), c('phi', 'psi','codon')] # Conformations in "sec" (angles-based definition) structure corresponding to "aa" amino-acid
+    
+    }
+    
     if(nrow(data_aa) == 0){next}
     
     data_aa <- data_aa[!(is.na(data_aa$phi) | is.na(data_aa$psi)), ] # Remove NAs
