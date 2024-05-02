@@ -7,7 +7,7 @@ library(readr)
 # Experimental data downloaded from https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/5P81D4
 data_path <- '/path_to_data'
 
-# AlphaFold2 data in the "nt_structure_2024.txt" file (don't needed if AF2 data is not used)
+# AlphaFold2 data in the "nt_structure_2024.txt" file (not needed if AF2 data is not used)
 AF2_path <- '/path_to_AF2_data' # Path to the file "nt_structure_2024.txt".
 
 # Load experimental data
