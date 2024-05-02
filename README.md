@@ -8,7 +8,7 @@ This code reproduces the analyses presented in [González-Delgado _et al._ 2024]
 
 * The simulation study described [González-Delgado _et al._ 2024](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v2) (Section B of the SI) is reproduced in [simulation_study.R](https://github.com/gonzalez-delgado/synco/blob/main/simulation_study.R). This files produces Figures 1 and S1 in [González-Delgado _et al._ 2024](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v2).
 
-If you encounter any trouble to run the scripts or reproduce the results presented in [1], please file an [issue](https://github.com/gonzalez-delgado/synco/-/issues) or [contact us](mailto:javier.gonzalezdelgado@mcgill.ca).
+For any inquires, please file an [issue](https://github.com/gonzalez-delgado/synco/issues) or [contact us](mailto:javier.gonzalezdelgado@mcgill.ca).
 
 #### References
 
