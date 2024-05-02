@@ -22,6 +22,7 @@
 #' @export
 
 library(dplyr)
+library(doParallel)
 
 get_tripeptides <- function(data_precs, N_cores){
   
@@ -45,7 +46,8 @@ get_tripeptides <- function(data_precs, N_cores){
         # Tripeptide information
         data_res <- cbind(prot_data$name[res_left], prot_data$name[res_central], prot_data$name[res_right], 
                           prot_data$codon[res_central], prot_data$phi[res_central], prot_data$psi[res_central], 
-                          prot_data$secondary[res_central]) 
+                          prot_data$secondary[res_central], prot_data$codon_score[res_central],
+                          prot_data$unp_id[res_central], prot_data$res_id[res_central]) 
       } 
       
       data_res # Residue data
@@ -57,11 +59,15 @@ get_tripeptides <- function(data_precs, N_cores){
   
   # Format tripeptide data
   trip_data <- as.data.frame(trip_data)
-  colnames(trip_data) <- c('res_left', 'res', 'res_right', 'codon', 'phi', 'psi', 'secondary')
+  colnames(trip_data) <- c('res_left', 'res', 'res_right',
+                           'codon', 'phi', 'psi', 'secondary',
+                           'codon_score','unp_id','res_id')
   
   # Format numeric variables
   trip_data$phi <- as.numeric(as.vector(trip_data$phi))
   trip_data$psi <- as.numeric(as.vector(trip_data$psi))
+  trip_data$codon_score <- as.numeric(as.vector(trip_data$codon_score))
+  trip_data$res_id <- as.numeric(as.vector(trip_data$res_id))
   
   # Remove NA
   trip_data <- trip_data[!(is.na(trip_data$codon) | is.na(trip_data$phi) | is.na(trip_data$psi)), ]

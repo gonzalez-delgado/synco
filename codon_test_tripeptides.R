@@ -1,13 +1,13 @@
 rm(list = ls())
 library(readr)
+library(dplyr)
 
-# Load functions from wgof_torus (https://github.com/gonzalez-delgado/wgof_torus)
-wgof_torus_path <- '/path_to_downloaded_wgof_torus_scripts' # Folder containing (only) the R scripts of wgof_torus
-for(Rfile in list.files(wgof_torus_path)){if(grepl("\\.R$", Rfile)){source(paste(c(wgof_torus_path, Rfile), collapse = '/'))}}
+# Uncomment to install torustest
+#devtools::install_github("https://github.com/gonzalez-delgado/torustest")
 
 # Load replication data downloaded from https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/5P81D4
 data_path <- '/path_to_data'
-data_precs <- read_csv(paste(c(data_path, "data-precs.csv"), collapse = '/'))
+data_precs <- readr::read_csv(paste(c(data_path, "data-precs.csv"), collapse = '/'))
 
 # Get tripeptide information
 source("get_tripeptides.R")
@@ -20,14 +20,22 @@ trip_list <- expand.grid(aa_list, aa_list, aa_list)
 # Merge != H,E structures into one category
 data_trip$secondary[which(! data_trip$secondary %in% c('H', 'E'))] <- 'Other'
 
-# Define secondary structure using angles
-data_trip$secondary_angles <- 'Other'
-data_trip$secondary_angles[which(data_trip$phi > -180 & data_trip$phi <= 0 & data_trip$psi > -120 & data_trip$psi <= 50)] <- 'H'
-data_trip$secondary_angles[which(data_trip$phi > -180 & data_trip$phi <= 0 & data_trip$psi > 50 & data_trip$psi <= 240)] <- 'E'
+# Uncomment do define secondary structure using angles
+#data_trip$secondary_angles <- 'Other'
+#data_trip$secondary_angles[which(data_trip$phi > -180 & data_trip$phi <= 0 & data_trip$psi > -120 & data_trip$psi <= 50)] <- 'H'
+#data_trip$secondary_angles[which(data_trip$phi > -180 & data_trip$phi <= 0 & data_trip$psi > 50 & data_trip$psi <= 240)] <- 'E'
+
+# Remove ambiguous codon assignments
+data_trip <- data_trip[-which(data_trip$codon_score < 1),]
+
+# Aggregate redundant data points
+data_trip <- data_trip %>% group_by(unp_id, res_id, res, codon, secondary) %>% summarize(
+  phi = atan2(sum(sin(phi)), sum(cos(phi)))*180/pi,
+  psi = atan2(sum(sin(psi)), sum(cos(psi)))*180/pi)
 
 # Simulate null statistics
 N_sim = 2000
-sim_null <- sim.null.stat(N_sim, NC = 4)
+sim_null <- torustest::sim.null.stat(N_sim, NC = 4)
 
 # Empty data.frame to fill it with results
 data_codon <- data.frame('L' = NA, 'C' = NA, 'R' = NA, 'C1' = NA, 'C2' = NA, 'pv' = NA, 'sec' = NA, 'n1' = NA, 'n2' = NA) 
@@ -43,6 +51,7 @@ for (sec in c('H', 'E', 'Other')){
     cat(paste0('Performing goodness-of-fit geodesic test for ',as.vector(trip_list[i,1]),'-',as.vector(trip_list[i,2]),'-',as.vector(trip_list[i,3]),' tripeptide...\n'))
 
     data_i <- data_trip[which(data_trip$res_left == as.vector(trip_list[i,1]) & data_trip$res == as.vector(trip_list[i,2]) & data_trip$res_right == as.vector(trip_list[i,3]) & data_trip$secondary == sec), c('phi', 'psi', 'codon')] # Conformations in "sec" (DSSP) structure corresponding to "aa" amino-acid
+    # Uncomment to use angle-based secondary structure classification
     #data_i <- data_trip[which(data_trip$res_left == as.vector(trip_list[i,1]) & data_trip$res == as.vector(trip_list[i,2]) & data_trip$res_right == as.vector(trip_list[i,3]) & data_trip$secondary_angles == sec), c('phi', 'psi', 'codon')] # Conformations in "sec" (angles-based definition) structure corresponding to "aa" amino-acid
     if(nrow(data_i) == 0){next}
     
@@ -68,7 +77,7 @@ for (sec in c('H', 'E', 'Other')){
       if(nrow(data_c1) < 30 | nrow(data_c2) < 30){next} # Keep only samples with >= 30 points
       
       #p-value for the goodness-of-fit test
-      pv_k <- twosample.geodesic.torus.test(data_c1, data_c2, n_geodesics = 2, NC_geodesic = 2, sim_null = sim_null)
+      pv_k <- torustest::twosample.geodesic.torus.test(data_c1, data_c2, n_geodesics = 2, NC_geodesic = 2, sim_null = sim_null)
         
       data_i_k <- c(as.vector(trip_list[i,1]), as.vector(trip_list[i,2]), as.vector(trip_list[i,3]), comb_cod[k,1], comb_cod[k,2], pv_k, 
                       sec, nrow(data_c1), nrow(data_c2))
