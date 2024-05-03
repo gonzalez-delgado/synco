@@ -8,6 +8,7 @@ library(readr)
 data_path <- '/path_to_data'
 
 # AlphaFold2 data in the "nt_structure_2024.txt" file (don't needed if AF2 data is not used)
+# The file can be downloaed from https://zenodo.org/doi/10.5281/zenodo.11110092. 
 AF2_path <- '/path_to_AF2_data' # Path to the file "nt_structure_2024.txt".
 
 # Load experimental data
