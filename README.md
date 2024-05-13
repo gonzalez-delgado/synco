@@ -12,10 +12,10 @@ For any inquires, please file an [issue](https://github.com/gonzalez-delgado/syn
 
 #### References
 
-[1] González-Delgado, J., González-Sanz, A., Cortés, J., & Neuvial, P. (2021). Two-sample goodness-of-fit tests on the flat torus based on Wasserstein distance and their relevance to structural biology. <i>Electron. J. Statist</i>., 17(1): 1547–1586, 2023. [https://doi.org/10.1214/23-EJS2135](https://doi.org/10.1214/23-EJS2135).
+[1] González-Delgado, J., González-Sanz, A., Cortés, J., & Neuvial, P. (2023). Two-sample goodness-of-fit tests on the flat torus based on Wasserstein distance and their relevance to structural biology. <i>Electron. J. Statist</i>., 17(1): 1547–1586. [https://doi.org/10.1214/23-EJS2135](https://doi.org/10.1214/23-EJS2135).
 
-[2] J. González-Delgado, Pau Bernadó, Pablo Mier, Pierre Neuvial, Juan Cortés. The dependence of the amino acid backbone conformation on the translated synonymous codon is not statistically significant. Submitted. [bioRxiv](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).
+[2] González-Delgado, J., Bernadó, B., Mier, P., Neuvial, P. & Cortés, J. (2024). The dependence of the amino acid backbone conformation on the translated synonymous codon is not statistically significant. Submitted. [bioRxiv](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).
 
-[3] Rosenberg, A.A., Marx, A. & Bronstein, A.M. Codon-specific Ramachandran plots show amino acid backbone conformation depends on identity of the translated codon. Nat Commun 13, 2815 (2022). [https://doi.org/10.1038/s41467-022-30390-9](https://doi.org/10.1038/s41467-022-30390-9).
+[3] Rosenberg, A.A., Marx, A. & Bronstein, A.M. (2022). Codon-specific Ramachandran plots show amino acid backbone conformation depends on identity of the translated codon. <i>Nat Commun</i>, 13, 2815. [https://doi.org/10.1038/s41467-022-30390-9](https://doi.org/10.1038/s41467-022-30390-9).
 
 
