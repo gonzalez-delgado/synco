@@ -22,7 +22,7 @@ Check [Akeju & Cope paper](https://doi.org/10.1093/gbe/evae080) for a complement
 
 [3] Rosenberg, A.A., Marx, A. & Bronstein, A.M. (2022). Codon-specific Ramachandran plots show amino acid backbone conformation depends on identity of the translated codon. <i>Nat Commun</i>, 13, 2815. [https://doi.org/10.1038/s41467-022-30390-9](https://doi.org/10.1038/s41467-022-30390-9).
 
-[4] Akeju, O.J., Cope, A. L. (2924). Re-examining Correlations Between Synonymous Codon Usage and Protein Bond Angles in Escherichia coli. <i>Genome Biology and Evolution</i>, 16(5): evae080. [https://doi.org/10.1093/gbe/evae080](https://doi.org/10.1093/gbe/evae080).
+[4] Akeju, O.J., Cope, A. L. (2024). Re-examining Correlations Between Synonymous Codon Usage and Protein Bond Angles in Escherichia coli. <i>Genome Biology and Evolution</i>, 16(5): evae080. [https://doi.org/10.1093/gbe/evae080](https://doi.org/10.1093/gbe/evae080).
 
 
 
