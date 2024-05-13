@@ -12,8 +12,7 @@ For any inquires, please file an [issue](https://github.com/gonzalez-delgado/syn
 
 #### Related work
 
-Check [Akeju & Cope paper](https://doi.org/10.1093/gbe/evae080) for a complementary analysis on how codon and bond angles correlation might be explained by the variation in codon usage across genes.
-
+Check [Akeju & Cope paper](https://doi.org/10.1093/gbe/evae080) for a complementary analysis of the codon and bond angles correlation described in [Rosenberg _et al._ 2022](https://doi.org/10.1038/s41467-022-30390-9).
 #### References
 
 [1] González-Delgado, J., González-Sanz, A., Cortés, J., & Neuvial, P. (2023). Two-sample goodness-of-fit tests on the flat torus based on Wasserstein distance and their relevance to structural biology. <i>Electron. J. Statist</i>., 17(1): 1547–1586. [https://doi.org/10.1214/23-EJS2135](https://doi.org/10.1214/23-EJS2135).
