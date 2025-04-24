@@ -18,7 +18,7 @@ Here, we present the figures depicting the results of the analyses presented in 
 
 <figure>
   <img src="figures/samplesizes.png" alt="Figure S1" width="300"/>
-  <figcaption><strong>Figure S1:</strong> Distribution (kernel density estimates) of the minimum sample size for the codon pairs in the dataset provided in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3) , after aggregating redundant data points and removing those with ambiguous codon assignment. Groups correspond to codon pairs for which differences between their codon-specific $(\phi,\psi)$ distributions were found significant (blue) and non-significant (red) at level $\alpha=0.05$ in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3). </figcaption>
+  <figcaption><strong>Figure S1:</strong> Distribution (kernel density estimates) of the minimum sample size for the codon pairs in the dataset provided in [2], after aggregating redundant data points and removing those with ambiguous codon assignment. Groups correspond to codon pairs for which differences between their codon-specific $(\phi,\psi)$ distributions were found significant (blue) and non-significant (red) at level $\alpha=0.05$ in [2]. </figcaption>
 </figure>
 
 <br>
