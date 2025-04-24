@@ -2,7 +2,7 @@
 
 ### Code description
 
-This code reproduces the analyses presented in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3), showing that differences between the codon-specific Ramachandran plots provided in [[[3]]](https://doi.org/10.1038/s41467-022-30390-9) are not statistically significant. The two-sample goodness-of-fit tests that have been used for the analyses were introduced in [[1]](https://doi.org/10.1214/23-EJS2135), whose implementation is available in the R package [torustest](https://github.com/gonzalez-delgado/torustest).
+This code reproduces the analyses presented in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3), showing that differences between the codon-specific Ramachandran plots provided in [[3]](https://doi.org/10.1038/s41467-022-30390-9) are not statistically significant. The two-sample goodness-of-fit tests that have been used for the analyses were introduced in [[1]](https://doi.org/10.1214/23-EJS2135), whose implementation is available in the R package [torustest](https://github.com/gonzalez-delgado/torustest).
 
 * The file [codon_test.R](https://github.com/gonzalez-delgado/synco/blob/main/codon_test.R) performs the goodness-of-fit test assessing the null hypothesis "Amino-acid backbone distribution does not depend on the identity of the translated codon". Codon-specific Ramachandran plots are defined for a given amino-acid without taking into account nearest neighbors effects. The analysis is carried out on the [experimental dataset](https://doi.org/10.7910/DVN/5P81D4) provided in [[3]](https://doi.org/10.1038/s41467-022-30390-9) and on the [same structures extracted from the AlphaFold database](https://zenodo.org/doi/10.5281/zenodo.11110092). Instructions to perform the analyses are provided in the file, that produces Figures 2a, 2b and results described in Section D of the SI in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).
 
@@ -14,13 +14,14 @@ For any inquires, please file an [issue](https://github.com/gonzalez-delgado/syn
 
 ### Results of the supplementary analyses
 
-Here, we present the figures depicting the results of the analyses presented in Sections C (Figure S1), D and E (Figure S2) of the SI in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).
+Here, we present the figures depicting the results of the analyses presented in Sections C (Figure S1), D and E (Figure S2) of the SI in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3). Their high quality .pdf counterparts are available in [figures](figures/).
 
 <figure>
   <img src="figures/samplesizes.png" alt="Figure S1" width="300"/>
-  <figcaption><strong>Figure S1:</strong> Distribution (kernel density estimates) of the minimum sample size for the codon pairs in the dataset provided in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3), after aggregating redundant data points and removing those with ambiguous codon assignment. Groups correspond to codon pairs for which differences between their codon-specific $(\phi,\psi)$ distributions were found significant (blue) and non-significant (red) at level $\alpha=0.05$ in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).</figcaption>
+  <figcaption><strong>Figure S1:</strong> Distribution (kernel density estimates) of the minimum sample size for the codon pairs in the dataset provided in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3) , after aggregating redundant data points and removing those with ambiguous codon assignment. Groups correspond to codon pairs for which differences between their codon-specific $(\phi,\psi)$ distributions were found significant (blue) and non-significant (red) at level $\alpha=0.05$ in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3). </figcaption>
 </figure>
 
+<br>
 <br>
 
 <figure>
