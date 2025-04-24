@@ -1,19 +1,40 @@
 # synco: Differences between synonymous codon-specific Ramachandran plots
 
-This code reproduces the analyses presented in [González-Delgado _et al._ 2024](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3), showing that differences between the codon-specific Ramachandran plots provided in [Rosenberg _et al._ 2022](https://doi.org/10.1038/s41467-022-30390-9) are statistically non-significant. The two-sample goodness-of-fit tests that have been used for the analyses were introduced in [González-Delgado _et al._ 2023](https://doi.org/10.1214/23-EJS2135), whose implementation is available in the R package [torustest](https://github.com/gonzalez-delgado/torustest).
+### Code description
 
-* The file [codon_test.R](https://github.com/gonzalez-delgado/synco/blob/main/codon_test.R) performs the goodness-of-fit test assessing the null hypothesis "Amino-acid backbone distribution does not depend on the identity of the translated codon". Codon-specific Ramachandran plots are defined for a given amino-acid without taking into account nearest neighbors effects. The analysis is carried out on the [experimental dataset](https://doi.org/10.7910/DVN/5P81D4) provided in [Rosenberg _et al._ 2022](https://doi.org/10.1038/s41467-022-30390-9) and on the [same structures extracted from the AlphaFold database](https://zenodo.org/doi/10.5281/zenodo.11110092). Instructions to perform the analyses are provided in the file, that produces Figures 2a, 2b and S4 in [González-Delgado _et al._ 2024](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).
+This code reproduces the analyses presented in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3), showing that differences between the codon-specific Ramachandran plots provided in [[[3]]](https://doi.org/10.1038/s41467-022-30390-9) are not statistically significant. The two-sample goodness-of-fit tests that have been used for the analyses were introduced in [[1]](https://doi.org/10.1214/23-EJS2135), whose implementation is available in the R package [torustest](https://github.com/gonzalez-delgado/torustest).
 
-* The same null hypothesis, but taking neighboring residues into account, is tested in [codon_test_tripeptides.R](https://github.com/gonzalez-delgado/synco/blob/main/codon_test_tripeptides.R). Here, the codon-specific Ramachandran plots contain conformations coming from a fixed tripeptide (fragment of three consecutive amino-acids). This analysis uses the function [get_tripeptides](https://github.com/gonzalez-delgado/synco/blob/main/get_tripeptides.R), which uses the sequence information of the [dataset](https://doi.org/10.7910/DVN/5P81D4) provided in [Rosenberg _et al._ 2022](https://doi.org/10.1038/s41467-022-30390-9) to extract neihgbors' identities.
+* The file [codon_test.R](https://github.com/gonzalez-delgado/synco/blob/main/codon_test.R) performs the goodness-of-fit test assessing the null hypothesis "Amino-acid backbone distribution does not depend on the identity of the translated codon". Codon-specific Ramachandran plots are defined for a given amino-acid without taking into account nearest neighbors effects. The analysis is carried out on the [experimental dataset](https://doi.org/10.7910/DVN/5P81D4) provided in [[3]](https://doi.org/10.1038/s41467-022-30390-9) and on the [same structures extracted from the AlphaFold database](https://zenodo.org/doi/10.5281/zenodo.11110092). Instructions to perform the analyses are provided in the file, that produces Figures 2a, 2b and results described in Section D of the SI in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).
 
-* The simulation study described [González-Delgado _et al._ 2024](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3) (Section B of the SI) is reproduced in [simulation_study.R](https://github.com/gonzalez-delgado/synco/blob/main/simulation_study.R). This files produces Figures 1 and S1 in [González-Delgado _et al._ 2024](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).
+* The same null hypothesis, but taking neighboring residues into account, is tested in [codon_test_tripeptides.R](https://github.com/gonzalez-delgado/synco/blob/main/codon_test_tripeptides.R). Here, the codon-specific Ramachandran plots contain conformations coming from a fixed tripeptide (fragment of three consecutive amino-acids). This analysis uses the function [get_tripeptides](https://github.com/gonzalez-delgado/synco/blob/main/get_tripeptides.R), which uses the sequence information of the [dataset](https://doi.org/10.7910/DVN/5P81D4) provided in [[3]](https://doi.org/10.1038/s41467-022-30390-9) to extract neighbors' identities. The code reproduces the analysis presented in Section E of the SI in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).
+
+* The simulation study described in Section B of the SI in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3) is reproduced in [simulation_study.R](https://github.com/gonzalez-delgado/synco/blob/main/simulation_study.R). This files produces also Figure 1 in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).
 
 For any inquires, please file an [issue](https://github.com/gonzalez-delgado/synco/issues) or [contact us](mailto:javier.gonzalezdelgado@mcgill.ca).
 
-#### Related work
+### Results of the supplementary analyses
+
+Here, we present the figures depicting the results of the analyses presented in Sections C (Figure S1), D and E (Figure S2) of the SI in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).
+
+<figure>
+  <img src="figures/samplesizes.png" alt="Figure S1" width="300"/>
+  <figcaption><strong>Figure S1:</strong> Distribution (kernel density estimates) of the minimum sample size for the codon pairs in the dataset provided in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3), after aggregating redundant data points and removing those with ambiguous codon assignment. Groups correspond to codon pairs for which differences between their codon-specific $(\phi,\psi)$ distributions were found significant (blue) and non-significant (red) at level $\alpha=0.05$ in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3).</figcaption>
+</figure>
+
+<br>
+
+<figure>
+  <img src="figures/tripeptide_and_ramachandran_results.png" alt="Figure S2" width="600"/>
+  <figcaption><strong>Figure S2:</strong> Empirical cumulative distribution function (ECDF) of corrected $p$-values corresponding to testing the equality of $(\phi,\psi)$ distribution pairs corresponding to different synonymous codons. In (a): samples included conformations in $\cal{A}$ and $\cal{B}$ classes, defined in Section D of the SI. In (b): samples included conformations in extended strand (E) and $\alpha$-helix secondary structures, with identical left and right neighbors. The dashed blue line of slope $1/\alpha$ indicates a target FDR set to $\alpha=0.05$ for the Benjamini-Hochberg (BH) correction, determining the proportion of rejections among each set of tested hypotheses. The dashed gray line represents the CDF of a Uniform distribution.</figcaption>
+</figure>
+
+<br>
+
+### Related work
 
 Check [Akeju & Cope paper](https://doi.org/10.1093/gbe/evae080) for a complementary analysis of the codon and bond angles correlation described in [Rosenberg _et al._ 2022](https://doi.org/10.1038/s41467-022-30390-9).
-#### References
+
+### References
 
 [1] González-Delgado, J., González-Sanz, A., Cortés, J., & Neuvial, P. (2023). Two-sample goodness-of-fit tests on the flat torus based on Wasserstein distance and their relevance to structural biology. <i>Electron. J. Statist</i>., 17(1): 1547–1586. [https://doi.org/10.1214/23-EJS2135](https://doi.org/10.1214/23-EJS2135).
 
