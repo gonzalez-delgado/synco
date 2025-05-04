@@ -12,25 +12,6 @@ This code reproduces the analyses presented in [[2]](https://www.biorxiv.org/con
 
 For any inquires, please file an [issue](https://github.com/gonzalez-delgado/synco/issues) or [contact us](mailto:javier.gonzalezdelgado@mcgill.ca).
 
-### Results of the supplementary analyses
-
-Here, we present the figures depicting the results of the analyses presented in Sections C (Figure S1), D and E (Figure S2) of the SI in [[2]](https://www.biorxiv.org/content/10.1101/2022.11.29.518303v3). Their high quality .pdf counterparts are available in [figures](figures/).
-
-<figure>
-  <img src="figures/samplesizes.png" alt="Figure S1" width="300"/>
-  <figcaption><strong>Figure S1:</strong> Distribution (kernel density estimates) of the minimum sample size for the codon pairs in the dataset provided in [2], after aggregating redundant data points and removing those with ambiguous codon assignment. Groups correspond to codon pairs for which differences between their codon-specific $(\phi,\psi)$ distributions were found significant (blue) and non-significant (red) at level $\alpha=0.05$ in [2]. </figcaption>
-</figure>
-
-<br>
-<br>
-
-<figure>
-  <img src="figures/tripeptide_and_ramachandran_results.png" alt="Figure S2" width="600"/>
-  <figcaption><strong>Figure S2:</strong> Empirical cumulative distribution function (ECDF) of corrected $p$-values corresponding to testing the equality of $(\phi,\psi)$ distribution pairs corresponding to different synonymous codons. In (a): samples included conformations in $\cal{A}$ and $\cal{B}$ classes, defined in Section D of the SI. In (b): samples included conformations in extended strand (E) and $\alpha$-helix secondary structures, with identical left and right neighbors. The dashed blue line of slope $1/\alpha$ indicates a target FDR set to $\alpha=0.05$ for the Benjamini-Hochberg (BH) correction, determining the proportion of rejections among each set of tested hypotheses. The dashed gray line represents the CDF of a Uniform distribution.</figcaption>
-</figure>
-
-<br>
-
 ### Related work
 
 Check [Akeju & Cope paper](https://doi.org/10.1093/gbe/evae080) for a complementary analysis of the codon and bond angles correlation described in [Rosenberg _et al._ 2022](https://doi.org/10.1038/s41467-022-30390-9).
